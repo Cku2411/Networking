@@ -1,0 +1,23 @@
+{
+  "name": "networking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "simple-dns.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cku2411/Networking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cku2411/Networking/issues"
+  },
+  "homepage": "https://github.com/Cku2411/Networking#readme",
+  "dependencies": {
+    "csv-parse": "^5.5.2"
+  }
+}
