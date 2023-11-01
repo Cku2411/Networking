@@ -1,8 +1,12 @@
 const url = "https://devdocs.io/puppeteer/index#class-browsercontext";
-const urlTest = "https://www.vietnamworks.com/viec-lam?q=construction&l=24";
+const urlTest =
+  "https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending";
+const testDialog =
+  "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related";
 const fs = require("fs");
 const cherio = require("cheerio");
 const puppeteer = require("puppeteer");
+const path = require("path");
 
 // ---------
 const headers = {
@@ -18,16 +22,45 @@ console.log(`Get's started`);
     headless: false,
     defaultViewport: null,
   });
+
   const page = await browser.newPage();
 
-  browser.on("targetcreated", async () => {
-    console.log(`page change to`, await browser.target().url());
+  // Event handle
+  page.on("load", () => {
+    console.log(`Page load successfully!`);
   });
 
-  await page.goto(url);
+  page.on("dialog", (dialog) => {
+    // finding the request that page made
+    console.log(`A diaglo was made`, dialog.message());
+  });
 
-  // const result = await page.$$(".search_list");
-  console.log(`Oki, do something!`);
+  page.on("console", (msg) => {
+    for (let i = 0; i < msg.args().length; ++i)
+      console.log(`${i}: ${msg.args()[i]}`);
+  });
 
-  await page.goto(urlTest);
+  page.on("frameattached", () => {
+    console.log(`There is a frame`);
+  });
+
+  // page.on("response", (res) => {
+  //   console.log(`an response has been received`, res.headers());
+  // });
+
+  page.on("request", (req) => {
+    console.log(`an request has been received`, req.headers());
+  });
+  // -----------
+
+  await page.goto(urlTest, {
+    waitUntil: "networkidle0",
+  });
+
+  // Do something
+  await page.screenshot({
+    path: "test.png",
+  });
+
+  console.log(`Done`);
 })();
