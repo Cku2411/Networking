@@ -1,18 +1,14 @@
-const love = {
-  1: 323,
-  2: 999,
-  3: 3232,
-};
+const axios = require("axios");
 
-const newLove = Object.assign({}, love, {
-  3: 88,
-  5: 323,
-});
+const url =
+  "https://airdrop.pyth.network/api/grant/v1/amount_and_proof?ecosystem=evm&identity=0x2B4D30465aA5ed5Bf41f2222C41099D961e16Ab0";
 
-const newlove2 = {
-  ...love,
-  ...newLove,
-  2: 99999,
-};
+(async () => {
+  try {
+    const result = await axios.get(url);
 
-
+    console.log(await result.data);
+  } catch (error) {
+    console.log(error);
+  }
+})();
