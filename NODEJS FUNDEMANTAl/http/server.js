@@ -38,6 +38,10 @@ app.get("/", (req, res) => {
     // maxAge: 5 * 1000,
     expires: new Date(Date.now() + 5 * 1000),
   });
+
+  // console.log(req.headers["user-agent"]);
+  console.log(req.headers);
+  console.log(req.navigator);
   res.send("Hello Session Tut");
 });
 
