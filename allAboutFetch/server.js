@@ -11,10 +11,17 @@ const port = 5000; /// http://127.0.0.1:3000/ksldjflkjsd
 app.use(cors());
 
 app.get("/", (req, res) => {
+  console.log(req.headers);
   res.send("Hello World!");
 });
 
+app.get("/:id", (req, res) => {
+  console.log(req.headers);
+  res.send("Opp, you did it again !");
+});
+
 app.post("/", (req, res) => {
+  console.log(req.body);
   res.status(201).send("thanks for adding something");
 });
 
@@ -31,5 +38,5 @@ app.delete("/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Example app listening on port http://127.0.0.1:${port}`);
 });
